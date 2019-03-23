@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { APIENDPOINT } from '../../config/configuration';
+import { UserService } from '../../service/users/user.service';
+import { UserModel } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public UserList: UserModel[] = [];
+
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.consumeUserService();
   }
+
+public consumeUserService() {
+   this.userService.get(APIENDPOINT.users)
+   .subscribe((resp: any) => {
+    this.UserList = resp;
+   });
+}
 
 }
