@@ -19,11 +19,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of UserList">
-            <th scope="row"> {{ user.id }} </th>
+            <td scope="row"> {{ user.id }} </td>
             <td> {{ user.name }} </td>
             <td> {{ user.email }} </td>
             <td> {{ user.phone }} </td>
-            <td> <a class="btn btn-primary btn-small" [routerLink]="['/album',user.id]"><i class="fa fa-eye"></i>
+            <td> <a class="btn btn-outline-info btn-sm" [routerLink]="['/album',user.id]"><i class="fa fa-eye"></i>
                 view</a> </td>
           </tr>
         </tbody>

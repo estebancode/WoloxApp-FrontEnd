@@ -11,6 +11,8 @@ import { FooterComponent } from './component/shared/footer/footer.component';
 import {appRoutes} from './app.router';
 import { HomeComponent } from './component/home/home.component';
 import { AlbumComponent } from './component/album/album.component';
+import { UseralbumComponent } from './component/useralbum/useralbum.component';
+import { PhotoComponent } from './component/photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AlbumComponent } from './component/album/album.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    AlbumComponent
+    AlbumComponent,
+    UseralbumComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule,

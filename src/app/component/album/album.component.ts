@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlbumService } from '../../service/albums/album.service';
+import { AlbumModel } from 'src/app/models/album.model';
+import { APIENDPOINT } from '../../config/configuration';
 
 @Component({
   selector: 'app-album',
@@ -9,19 +12,26 @@ import { ActivatedRoute } from '@angular/router';
 export class AlbumComponent implements OnInit {
 
   id: number;
+  public albumList: AlbumModel[] = [];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private albumService: AlbumService) { }
 
   ngOnInit() {
 
     this.route.params.subscribe(params => {
       this.id = +params.id; // (+) converts string 'id' to a number
-
-      // In a real app: dispatch action to load the details here.
+      this.consumeAlbumService();
    });
-
-    console.log(this.id);
 
   }
 
+public consumeAlbumService() {
+  this.albumService.get(APIENDPOINT.albums).
+  subscribe((resp: any) => {
+    this.albumList = resp;
+  });
+
 }
+
+}
+

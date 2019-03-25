@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center">Photos</h2>
+      <p class="text-left">Album name: <b>{{ albumSelect.title }} </b> </p>
+      <br>
+      <a class="javascript:void(0)" routerLink="/useralbum/{{ userId }}" class="btn btn-outline-secondary pull-right">back
+      your albums</a>
+      <br><br>
+    </div>
+  </div>
+  <div class="row">
+      <div *ngFor="let photo of photoList" class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img src="{{ photo.url }}" width="100%" height="225" />
+            <div class="card-body">
+              <p class="card-text"> {{ photo.title }} </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted">{{ photo.id }} mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
