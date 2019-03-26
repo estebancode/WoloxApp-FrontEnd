@@ -78,7 +78,7 @@ export class UseralbumComponent implements OnInit {
       this.albumModel.permissions = this.newPermision.value;
       this.albumService.put(`${APIENDPOINT.albumsPermission}${this.albumModel.id}`, '', this.albumModel).
       subscribe((resp: any) => {
-        console.log(resp);
+        this.loadAlbumModel(this.albumModel.id);
       });
   }
 
@@ -103,6 +103,13 @@ export class UseralbumComponent implements OnInit {
       userId,
       read,
       write
+    });
+  }
+
+  public loadAlbumModel(id: number) {
+    this.albumService.get(`${APIENDPOINT.albumGetById}${id}`).
+    subscribe((resp: any) => {
+      this.albumModel = resp;
     });
   }
 
