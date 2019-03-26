@@ -1,6 +1,5 @@
 import { AddressModel } from './address.model';
 import { CompanyModel } from './company.model';
-import { PermissionModel } from './permision.model';
 
 export class UserModel {
     public id: number;
@@ -11,5 +10,4 @@ export class UserModel {
     public phone: string;
     public website: string;
     public company: CompanyModel;
-    public permissions: PermissionModel[];
 }

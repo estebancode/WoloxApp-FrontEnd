@@ -18,35 +18,16 @@ export abstract class BaseService<TModel> {
     public getAll(endPoint: string, queryString: string = '') {
         return this.httpClient.get<ResponseModel<TModel[]>>(`${this.API_ROOT}${endPoint}${queryString}`, { headers: this.headers })
             .pipe(map(resp => {
-                if (resp.header.responseCode !== 200) {
-                    throw resp.header.message;
-                }
                 return resp;
             }, error => {
                 console.log(error);
             }));
     }
 
-    // public getAllFiltered(endPoint: string, queryString: string = '') {
-    //     return this.httpClient.get<ResponseModel<ResponseFiltered<TModel[]>>>(`${this.API_ROOT}${endPoint}${queryString}`
-    //         , { headers: this.headers })
-    //         .pipe(map(resp => {
-    //             if (resp.header.responseCode !== 200) {
-    //                 throw resp.header.message;
-    //             }
-    //             return resp;
-    //         }, error => {
-    //             console.log(error);
-    //         }));
-    // }
-
 // get
     public get(endPoint: string, queryString: string = '') {
         return this.httpClient.get<ResponseModel<TModel[]>>(`${this.API_ROOT}${endPoint}${queryString}`, { headers: this.headers })
             .pipe(map(resp => {
-                // if (resp.header.responseCode !== 200) {
-                //     throw resp.header.message;
-                // }
                 return resp;
             }, error => {
                 console.log(error);
@@ -57,9 +38,6 @@ export abstract class BaseService<TModel> {
     public post(endPoint: string, object: TModel) {
         return this.httpClient.post<ResponseModel<TModel[]>>(`${this.API_ROOT}${endPoint}`, object, { headers: this.headers })
             .pipe(map(resp => {
-                if (resp.header.responseCode !== 200) {
-                    throw resp.header.message;
-                }
                 return resp;
             }, error => {
                 console.log(error);
@@ -70,9 +48,6 @@ export abstract class BaseService<TModel> {
     public put(endPoint: string, queryString: string = '', object: TModel) {
         return this.httpClient.put<ResponseModel<TModel[]>>(`${this.API_ROOT}${endPoint}${queryString}`, object, { headers: this.headers })
             .pipe(map(resp => {
-                if (resp.header.responseCode !== 200) {
-                    throw resp.header.message;
-                }
                 return resp;
             }, error => {
                 console.log(error);

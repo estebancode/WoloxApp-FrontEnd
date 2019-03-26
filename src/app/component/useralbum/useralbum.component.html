@@ -57,32 +57,32 @@
     <div id="collapseExample" [ngbCollapse]="isCollapsedAdd">
       <div class="card">
         <div class="card-body">
-          <form>
+          <form [formGroup]="newPermision" (ngSubmit)="savePermision()" novalidate="novalidate" >
             <!-- Select Basic -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="selectbasic">Select user</label>
+              <label class="col-md-4 control-label" for="userId">Select user</label>
               <div class="col-md-6">
-                <select id="selectbasic" name="selectbasic" class="form-control">
-                  <option value="-0">-- select option --</option>
-                  <option *ngFor="let user of userList" value="user.id"> {{ user.name }} </option>
+                <select formControlName="userId" name="userId" id="userId" class="form-control">
+                  <option selected value="-0">-- select option --</option>
+                  <option *ngFor="let user of userList" [value]="user.id" > {{ user.name }} </option>
                 </select>
               </div>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="Read">
+              <input class="form-check-input" formControlName="read" name="read" type="checkbox" value="" id="Read">
               <label class="form-check-label" for="Read">
                 Read
               </label>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="white">
-              <label class="form-check-label" for="white">
-                white
+              <input class="form-check-input" formControlName="write" name="write" type="checkbox" value="" id="write">
+              <label class="form-check-label" for="write">
+                write
               </label>
             </div>
-
+            <button type="submit"  class="btn btn-sm btn-success" >add</button>
           </form>
         </div>
       </div>

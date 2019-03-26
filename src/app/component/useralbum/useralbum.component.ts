@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 import { AlbumService } from '../../service/albums/album.service';
@@ -21,6 +22,8 @@ export class UseralbumComponent implements OnInit {
   public albumModel: AlbumModel;
   public isCollapsedAdd = false;
   public isCollapsedList = false;
+  public newPermision: FormGroup;
+  public userModel: UserModel;
 
   constructor(private albumService: AlbumService,
               private route: ActivatedRoute,
@@ -29,6 +32,7 @@ export class UseralbumComponent implements OnInit {
 
   ngOnInit() {
     this.consumeUserService();
+    this.validateForm();
     this.route.params.subscribe(params => {
       this.id = +params.id; // (+) converts string 'id' to a number
       this.consumeAlbumByUserService(this.id);
@@ -67,6 +71,38 @@ export class UseralbumComponent implements OnInit {
     this.userService.get(APIENDPOINT.users).
     subscribe((resp: any) => {
       this.userList = resp;
+    });
+  }
+
+  savePermision() {
+      this.albumModel.permissions = this.newPermision.value;
+      this.albumService.put(`${APIENDPOINT.albumsPermission}${this.albumModel.id}`, '', this.albumModel).
+      subscribe((resp: any) => {
+        console.log(resp);
+      });
+  }
+
+  validateForm() {
+    // tslint:disable-next-line:prefer-const
+    let userId = new FormControl('',
+      [
+        Validators.required,
+        Validators.pattern('^[0-9]*$'),
+        Validators.minLength(8),
+      ]);
+    // tslint:disable-next-line:prefer-const
+    let read = new FormControl('',
+      [
+
+      ]);
+    // tslint:disable-next-line:prefer-const
+    let write = new FormControl('',
+      [
+      ]);
+    this.newPermision = new FormGroup({
+      userId,
+      read,
+      write
     });
   }
 

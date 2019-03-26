@@ -8,6 +8,7 @@ users : 'users',
 albums: 'albums',
 albumGetById: 'albums/GetById/',
 albumsByUser: 'albums/GetAllByUserId/',
+albumsPermission: 'albums/permission/',
 
 // photos
 photosByAlbum: 'photos/GetAllByAlbumId/',
