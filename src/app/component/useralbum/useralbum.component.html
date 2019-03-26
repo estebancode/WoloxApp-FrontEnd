@@ -46,47 +46,69 @@
       <div class="card-body">
         <h5 class="card-title"> {{ albumModel.title }} </h5>
         <h6 class="card-subtitle mb-2 text-muted">ID: {{ albumModel.id }} </h6>
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-outline-primary" (click)="isCollapsedAdd = !isCollapsedAdd"
-            [attr.aria-expanded]="!isCollapsedAdd" aria-controls="collapseExample">Add</button>
-          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample11">List</button>
-        </div>
       </div>
     </div>
-    <div id="collapseExample" [ngbCollapse]="isCollapsedAdd">
-      <div class="card">
-        <div class="card-body">
-          <form [formGroup]="newPermision" (ngSubmit)="savePermision()" novalidate="novalidate" >
-            <!-- Select Basic -->
-            <div class="form-group">
-              <label class="col-md-4 control-label" for="userId">Select user</label>
-              <div class="col-md-6">
-                <select formControlName="userId" name="userId" id="userId" class="form-control">
-                  <option selected value="-0">-- select option --</option>
-                  <option *ngFor="let user of userList" [value]="user.id" > {{ user.name }} </option>
-                </select>
+    <br>
+    <ngb-tabset>
+      <ngb-tab title="Add">
+        <ng-template ngbTabContent>
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="newPermision" (ngSubmit)="savePermision()" novalidate="novalidate">
+                <!-- Select Basic -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="userId">Select user</label>
+                  <div class="col-md-6">
+                    <select formControlName="userId" name="userId" id="userId" class="form-control">
+                      <option selected value="-0">-- select option --</option>
+                      <option *ngFor="let user of userList" [value]="user.id"> {{ user.name }} </option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="read" name="read" type="checkbox" value="" id="Read">
+                  <label class="form-check-label" for="Read">
+                    Read
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" formControlName="write" name="write" type="checkbox" value=""
+                    id="write">
+                  <label class="form-check-label" for="write">
+                    write
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-sm btn-success">add</button>
+              </form>
+            </div>
+          </div>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle><b>List</b></ng-template>
+        <ng-template ngbTabContent>
+          <div *ngIf="albumModel.permission.length > 0">
+            <div *ngFor="let permissions of albumModel.permission" class="card">
+              <div class="card-body">
+                <h5 class="card-title"> UserId: {{ permissions.userId }} </h5>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input"  [checked]="permissions.read"
+                    id="read">
+                  <label class="custom-control-label" for="read">read</label>
+                </div>
+                <div class="custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" [checked]="permissions.write" id="write">
+                  <label class="custom-control-label" for="write">write</label>
+                </div>
               </div>
             </div>
-
-            <div class="form-check">
-              <input class="form-check-input" formControlName="read" name="read" type="checkbox" value="" id="Read">
-              <label class="form-check-label" for="Read">
-                Read
-              </label>
-            </div>
-
-            <div class="form-check">
-              <input class="form-check-input" formControlName="write" name="write" type="checkbox" value="" id="write">
-              <label class="form-check-label" for="write">
-                write
-              </label>
-            </div>
-            <button type="submit"  class="btn btn-sm btn-success" >add</button>
-          </form>
-        </div>
-      </div>
-    </div>
+            <br>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">close</button>

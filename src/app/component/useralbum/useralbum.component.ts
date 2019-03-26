@@ -49,6 +49,8 @@ export class UseralbumComponent implements OnInit {
 
   open(content, album) {
     this.albumModel = null;
+    console.log('album', album);
+    
     this.albumModel = album;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
